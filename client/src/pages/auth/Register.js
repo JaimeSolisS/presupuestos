@@ -1,6 +1,8 @@
 import { Button } from 'antd';
 import React, {useState} from 'react'
 import styled from 'styled-components'
+import {auth} from '../../firebase'
+
 
  const Register = () => {
 
