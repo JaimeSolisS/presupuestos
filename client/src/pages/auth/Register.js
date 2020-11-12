@@ -17,6 +17,11 @@ import {toast} from 'react-toastify'
             handleCodeInApp: true,
         };
 
+        if (!email){
+            toast.error("Email required");
+            return;
+        }
+
         await auth.sendSignInLinkToEmail(email, config);
         toast.info(
             `Correo enviado a ${email}. Da click en el enlace para finalizar tu registro.`);

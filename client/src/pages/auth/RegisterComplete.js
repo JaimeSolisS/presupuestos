@@ -5,20 +5,53 @@ import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 
 
- const RegisterComplete = (props) => {
+ const RegisterComplete = ({history}) => {
 
   
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState('')
      //props.history
      
-     useState(() => {
-         setEmail(window.localStorage.getItem("emailForRegistration"))
+     useEffect(() => {
+         setEmail(window.localStorage.getItem("emailForRegistration"));
+          // console.log(window.location.href);
+    // console.log(window.localStorage.getItem("emailForRegistration"));
 
      }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
+        //validate
+        if (!email || !password){
+            toast.error("Email and password required");
+            return;
+        }
+
+        if (password.length <6){
+            toast.error("Password must be at least 6 characters long");
+            return; 
+        }
+
+        try {
+            const result = await auth.signInWithEmailLink(email, window.location.href)
+
+            //console.log('Result:', result)
+            if (result.user.emailVerified){
+                //remover usuario de local storage
+                window.localStorage.removeItem("emailForRegistration");
+                //get id token del usuario
+                let user = auth.currentUser;
+                await user.updatePassword(password);
+                const getIdTokenResult = await user.getIdTokenResult()
+                //redux 
+                //redirect
+                history.push('/')
+
+            }
+        } catch (error){
+            console.log(error)
+            toast.error(error.message)
+        }
         };
   
     const completeRegistrationForm = () => (
