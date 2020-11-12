@@ -2,8 +2,8 @@ import { Button } from 'antd';
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {auth} from '../../firebase'
-import {toast, ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import {toast} from 'react-toastify'
+
 
  const Register = () => {
 
@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css'
     const handleSubmit = async (e) => {
         e.preventDefault(); // prevent browser reload
         const config = {
-            url: 'http://localhost:3000/register/complete',  //url a donde regresar
+            url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
             handleCodeInApp: true,
         };
 
@@ -28,7 +28,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
         };
   
-    const registerForm = () => <form onSubmit={handleSubmit}>
+    const registerForm = () => (<form onSubmit={handleSubmit}>
         <input type="email" 
         className= "form-control" 
         value={email} 
@@ -41,7 +41,7 @@ import 'react-toastify/dist/ReactToastify.css'
         </button>
        
     </form>
-
+);
      return (
        
         <div className="container p-5">
@@ -49,7 +49,7 @@ import 'react-toastify/dist/ReactToastify.css'
                 <div className="col-md-6 offset-md-3">
 
                     <h4>Register</h4>
-                    <ToastContainer  />
+       
                     
                     {registerForm()}
 
