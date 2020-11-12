@@ -4,6 +4,9 @@ import React from "react";
 import {Switch, Route} from "react-router-dom"
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+//import {createStore} from 'redux'
+//import {Provider} from 'react-redux'
+//import {composeWithDevTools} from 'redux-devtools-extension'
 
 import Home from './pages/Home'
 import Register from './pages/auth/Register'
