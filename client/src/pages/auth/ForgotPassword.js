@@ -28,7 +28,7 @@ const ForgotPassword = ({ history }) => {
         .then(() => {
           setEmail("");
           setLoading(false);
-          toast.success("Check your email for password reset");
+          toast.info("Se ha enviado un link a tu correo para cambiar tu contraseña. Por favor revísalo");
         })
         .catch((error) => {
           setLoading(false);
@@ -39,11 +39,7 @@ const ForgotPassword = ({ history }) => {
   
     return (
       <div>
-        {loading ? (
-          <h4>Loading</h4>
-        ) : (
-          <h4>Forgot Password</h4>
-        )}
+        {loading ? (<h4>Espera...</h4>): (<h4>¿Olvidaste tu Contraseña?</h4>)}
   
         <form onSubmit={handleSubmit}>
           <input
@@ -55,7 +51,7 @@ const ForgotPassword = ({ history }) => {
           />
           <br />
           <button disabled={!email}>
-            Submit
+            Recuperar
           </button>
         </form>
       </div>

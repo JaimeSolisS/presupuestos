@@ -50,13 +50,13 @@ const Header = () => {
 
         {!user && (
               <Item key="register" icon={<UserAddOutlined />} className="float-right">
-              <Link to = "/register">Register</Link>
+              <Link to = "/register">Registrarse</Link>
               </Item>
         )}
 
         {!user && (
              <Item key="login" icon={<UserOutlined />} className="float-right">
-             <Link to = "/login">Login</Link>
+             <Link to = "/login">Iniciar sesión</Link>
              </Item>
 
         )}

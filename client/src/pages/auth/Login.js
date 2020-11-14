@@ -61,10 +61,10 @@ import {Link} from 'react-router-dom'
         />
 
         <button onClick={handleSubmit} type="submit" className="btn btn-raised" disabled={!email || password.length < 6}>
-            Login
+            ENTRAR
         </button>
 
-        <Link to= "forgot/password" className="float-right text-danger">Forgot Password</Link>
+        <Link to= "forgot/password" className="float-right text-danger">¿Olvidaste tu Contraseña?</Link>
        
     </form>
 );
@@ -74,7 +74,7 @@ import {Link} from 'react-router-dom'
             <div className="row">
                 <div className="col-md-6 offset-md-3">
 
-                    <h4>Login</h4>
+                    <h4>Iniciar Sesión</h4>
        
                     
                     {loginForm()}

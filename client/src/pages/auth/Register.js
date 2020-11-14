@@ -26,13 +26,13 @@ import {useSelector} from 'react-redux'
         };
 
         if (!email){
-            toast.error("Email required");
+            toast.error("Email requerido");
             return;
         }
 
         await auth.sendSignInLinkToEmail(email, config);
         toast.info(
-            `Correo enviado a ${email}. Da click en el enlace para finalizar tu registro.`);
+            `Correo enviado a ${email}. Da click en el enlace para continuar tu registro.`);
         
             //hay que guardar el email en local storage para que no tener que meter otro.
             window.localStorage.setItem('emailForRegistration', email)
@@ -50,7 +50,7 @@ import {useSelector} from 'react-redux'
         />
 
         <button type="submit" className="btn btn-raised">
-            Register
+            Registrarse
         </button>
        
     </form>
@@ -61,7 +61,7 @@ import {useSelector} from 'react-redux'
             <div className="row">
                 <div className="col-md-6 offset-md-3">
 
-                    <h4>Register</h4>
+                    <h4>Registrarse</h4>
        
                     
                     {registerForm()}
