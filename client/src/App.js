@@ -36,7 +36,7 @@ const App = () => {
                         type: 'LOGGED_IN_USER', 
                         payload: {
                           name: response.data.name,
-                          email: user.email, 
+                          email: response.data.email, 
                           token: idTokenResult.token, 
                           role: response.data.role,
                           _id: response.data.id,
