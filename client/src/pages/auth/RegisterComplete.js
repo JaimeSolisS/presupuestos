@@ -4,15 +4,8 @@ import styled from 'styled-components'
 import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'
-import axios from 'axios'
+import {createOrUpdateUser} from "../../functions/auth"
 
-const createOrUpdateUser = async (authtoken) => {
-    return await axios.post(`${process.env.REACT_APP_API}/create-or-update-user`, {}, {
-        headers: {
-            authtoken: authtoken, 
-        }
-    })
-}
 
 
  const RegisterComplete = ({history}) => {
