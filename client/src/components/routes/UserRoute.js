@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Link} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import LoadingToRedirect from './LoadingToRedirect'
 
 /*
 https://reactrouter.com/web/example/auth-workflow
@@ -32,7 +33,7 @@ const UserRoute = ({children, ...rest}) => {
     return user && user.token ? (
         <Route {...rest} render = {() => children}/>
     ) : (
-        <h1>Espera...</h1> //redirigir a otro componente
+        <LoadingToRedirect/>
     )
 
 }
