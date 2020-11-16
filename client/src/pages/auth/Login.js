@@ -21,6 +21,14 @@ import {createOrUpdateUser} from "../../functions/auth"
 
      let dispatch = useDispatch();
 
+     const roleBasedRedirect = (response) => {
+        if (response.data.role === 'admin') {
+            history.push("/admin/dashboard"); // todavía no está pero podría ser una opción
+        } else {
+            history.push('/user/history');  //TEST
+        }
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
@@ -44,10 +52,11 @@ import {createOrUpdateUser} from "../../functions/auth"
                   _id: response.data.id,
                 },
               });
+              roleBasedRedirect(response) 
         })
         .catch(error => console.log(error));
-        history.push('/')
-          
+        //history.push('/')
+        
         } catch (error){
             //console.log(error)
             toast.error(error.message)
