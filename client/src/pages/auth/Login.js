@@ -40,18 +40,23 @@ const createOrUpdateUser = async (authtoken) => {
         const idTokenResult = await user.getIdTokenResult()
 
         createOrUpdateUser(idTokenResult.token)
-        .then((response) => console.log("Create or update response", response))
+        .then((response) => {
+            dispatch({
+                type: 'LOGGED_IN_USER', 
+                payload: {
+                  name: response.data.name,
+                  email: user.email, 
+                  token: idTokenResult.token, 
+                  role: response.data.role,
+                  _id: response.data.id,
+                },
+              });
+        })
         .catch();
-        /* for now
-        dispatch({
-            type: 'LOGGED_IN_USER', 
-            payload: {
-              email: user.email, //se puede agregar más info después
-              token: idTokenResult.token, 
-            },
-          });
-          history.push('/')
-          */
+    
+      
+        history.push('/')
+          
         } catch (error){
             //console.log(error)
             toast.error(error.message)

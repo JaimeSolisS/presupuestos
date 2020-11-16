@@ -3,6 +3,16 @@ import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
+import {useDispatch, useSelector} from 'react-redux'
+import axios from 'axios'
+
+const createOrUpdateUser = async (authtoken) => {
+    return await axios.post(`${process.env.REACT_APP_API}/create-or-update-user`, {}, {
+        headers: {
+            authtoken: authtoken, 
+        }
+    })
+}
 
 
  const RegisterComplete = ({history}) => {
@@ -10,7 +20,10 @@ import {toast} from 'react-toastify'
   
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState('')
-     //props.history
+ 
+     const {user} = useSelector(state => ({...state}));
+
+     let dispatch = useDispatch();
      
      useEffect(() => {
          setEmail(window.localStorage.getItem("emailForRegistration"));
@@ -42,8 +55,23 @@ import {toast} from 'react-toastify'
                 //get id token del usuario
                 let user = auth.currentUser;
                 await user.updatePassword(password);
-                const getIdTokenResult = await user.getIdTokenResult()
+                const idTokenResult = await user.getIdTokenResult()
                 //redux 
+                //console.log('user', user, 'idTokenResult', idTokenResult)
+                createOrUpdateUser(idTokenResult.token)
+                .then((response) => {
+                    dispatch({
+                        type: 'LOGGED_IN_USER', 
+                        payload: {
+                          name: response.data.name,
+                          email: user.email, 
+                          token: idTokenResult.token, 
+                          role: response.data.role,
+                          _id: response.data.id,
+                        },
+                      });
+                })
+                .catch();
                 //redirect
                 history.push('/')
 
