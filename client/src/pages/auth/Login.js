@@ -5,7 +5,15 @@ import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
+const createOrUpdateUser = async (authToken) => {
+    return await axios.post(process.env.REACT_APP_API, {}, {
+        headers: {
+            authToken: authToken, 
+        }
+    })
+}
  const Login = ({history}) => {  
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
@@ -31,6 +39,12 @@ import {Link} from 'react-router-dom'
         const {user} = result
         const idTokenResult = await user.getIdTokenResult()
 
+        createOrUpdateUser(idTokenResult.token);
+
+        createOrUpdateUser(idTokenResult.token)
+        .then((response) => console.log("Create or update response", response))
+        .catch();
+        /* for now
         dispatch({
             type: 'LOGGED_IN_USER', 
             payload: {
@@ -39,6 +53,7 @@ import {Link} from 'react-router-dom'
             },
           });
           history.push('/')
+          */
         } catch (error){
             //console.log(error)
             toast.error(error.message)
