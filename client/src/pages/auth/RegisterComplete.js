@@ -64,7 +64,7 @@ import {createOrUpdateUser} from "../../functions/auth"
                         },
                       });
                 })
-                .catch();
+                .catch(error => console.log(error));
                 //redirect
                 history.push('/')
 

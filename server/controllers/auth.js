@@ -16,3 +16,10 @@ exports.createOrUpdateUser = async (request, response) => {
         response.json(newUser); 
     }
 };
+
+exports.currentUser = async (request, response) => {
+    (await User.findOne({email: request.user.email})).exec((error, user) => {
+        if (error) throw new Error(error);
+        response.json(user); 
+    })
+}

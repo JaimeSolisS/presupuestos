@@ -45,9 +45,7 @@ import {createOrUpdateUser} from "../../functions/auth"
                 },
               });
         })
-        .catch();
-    
-      
+        .catch(error => console.log(error));
         history.push('/')
           
         } catch (error){

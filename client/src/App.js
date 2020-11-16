@@ -17,6 +17,7 @@ import ForgotPassword from './pages/auth/ForgotPassword'
 
 import {auth} from './firebase'
 import {useDispatch} from 'react-redux'
+import {currentUser} from './functions/auth'
 
 
 const App = () => {
@@ -29,14 +30,20 @@ const App = () => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult()
        // console.log("user", user)
-        dispatch({
-          type: 'LOGGED_IN_USER', 
-          payload: {
-            email: user.email, //se puede agregar más info después
-            token: idTokenResult.token, 
-
-          },
-        });
+       currentUser(idTokenResult.token)
+                .then((response) => {
+                    dispatch({
+                        type: 'LOGGED_IN_USER', 
+                        payload: {
+                          name: response.data.name,
+                          email: user.email, 
+                          token: idTokenResult.token, 
+                          role: response.data.role,
+                          _id: response.data.id,
+                        },
+                      });
+                })
+                .catch(error => console.log(error));
       }
     });
 
