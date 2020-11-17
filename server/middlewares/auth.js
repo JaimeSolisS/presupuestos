@@ -17,9 +17,9 @@ exports.authCheck = async (request, response, nextMethod) => {
 }
 
 exports.adminCheck = async (request, response, next) => {
-    const {email} = request.userc
+    const {email} = request.user;
 
-    const adminUser = async = await (await User.findOne({email})).exec()
+    const adminUser = async = await User.findOne({email}).exec()
 
     if(adminUser.role !== 'admin'){
         response.status(403).json({
