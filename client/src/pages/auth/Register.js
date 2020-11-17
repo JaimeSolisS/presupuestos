@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
+import {StyledContainer, StyledDivRow, StyledDivColOffSet,
+        StyledInputFormControl, StyledDivFormGroup, StyledRegisterButton} from '../../styled'
 
 
  const Register = ({history}) => {
@@ -42,35 +44,37 @@ import {useSelector} from 'react-redux'
         };
   
     const registerForm = () => (<form onSubmit={handleSubmit}>
-        <input type="email" 
-        className= "form-control" 
+
+        <StyledDivFormGroup>
+
+       
+        <StyledInputFormControl
+        type="email"
         value={email} 
         onChange={e => setEmail(e.target.value)}
         autoFocus
+        placeholder='Correo'
         />
+        </StyledDivFormGroup>
 
-        <button type="submit" className="btn btn-raised">
+        
+        <StyledRegisterButton type="submit">
             Registrarse
-        </button>
+        </StyledRegisterButton>
+
        
     </form>
 );
      return (
        
-        <div className="container p-5">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-
+        <StyledContainer>
+            <StyledDivRow>
+                <StyledDivColOffSet>
                     <h4>Registrarse</h4>
-       
-                    
                     {registerForm()}
-
-                </div>
-
-            </div>
-
-        </div>
+                </StyledDivColOffSet>
+            </StyledDivRow>
+        </StyledContainer>
      )
  }
 

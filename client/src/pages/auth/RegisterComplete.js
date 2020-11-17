@@ -5,12 +5,10 @@ import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'
 import {createOrUpdateUser} from "../../functions/auth"
+import {StyledInputFormControl, StyledDivFormGroup, StyledRegisterButton,
+        StyledContainer, StyledDivRow, StyledDivColOffSet} from '../../styled'
 
-
-
- const RegisterComplete = ({history}) => {
-
-  
+ const RegisterComplete = ({history}) => {  
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState('')
  
@@ -77,37 +75,29 @@ import {createOrUpdateUser} from "../../functions/auth"
   
     const completeRegistrationForm = () => (
         <form onSubmit={handleSubmit}>
-        <input type="email" className= "form-control" value={email} disabled />
-        <input type="password" className= "form-control" value={password} onChange={e => setPassword(e.target.value)} 
-        placeholder="Password"
-        autoFocus
-        />
-
-        <br/>
-
-        <button type="submit" className="btn btn-raised">
-            Complete Registration
-        </button>
-       
-    </form>
+            <StyledDivFormGroup>
+            <StyledInputFormControl type="email" value={email} disabled />
+            <StyledInputFormControl
+                type="password" value={password} onChange={e => setPassword(e.target.value)} 
+                placeholder="Contraseña"
+                autoFocus
+            />
+            </StyledDivFormGroup>
+            <StyledRegisterButton type="submit">
+                Acceptar
+            </StyledRegisterButton>
+        </form>
     );
 
      return (
-       
-        <div className="container p-5">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-
-                    <h4>Register Complete</h4>
-       
-                    
+        <StyledContainer>
+            <StyledDivRow>
+                <StyledDivColOffSet>
+                    <h4>Terminar Registro</h4>
                     {completeRegistrationForm()}
-
-                </div>
-
-            </div>
-
-        </div>
+                </StyledDivColOffSet>
+            </StyledDivRow>
+        </StyledContainer>
      )
  }
 

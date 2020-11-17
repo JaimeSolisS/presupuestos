@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import {useSelector} from 'react-redux'
+import {StyledContainer, StyledDivRow, StyledDivColOffSet,
+  StyledInputFormControl, StyledDivFormGroup, StyledRegisterButton} from '../../styled'
+
 
 const ForgotPassword = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -38,23 +41,29 @@ const ForgotPassword = ({ history }) => {
     };
   
     return (
-      <div>
-        {loading ? (<h4>Espera...</h4>): (<h4>¿Olvidaste tu Contraseña?</h4>)}
-  
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoFocus
-          />
-          <br />
-          <button disabled={!email}>
-            Recuperar
-          </button>
-        </form>
-      </div>
+
+      <StyledContainer>
+        <StyledDivRow>
+          <StyledDivColOffSet>
+            {loading ? (<h4>Espera...</h4>): (<h4>¿Olvidaste tu Contraseña?</h4>)}
+            <form onSubmit={handleSubmit}>
+              <StyledDivFormGroup>
+              <StyledInputFormControl
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoFocus
+              />
+              </StyledDivFormGroup>
+
+              <StyledRegisterButton disabled={!email}>
+                Recuperar
+              </StyledRegisterButton>
+            </form>
+          </StyledDivColOffSet>
+        </StyledDivRow>
+      </StyledContainer>
+       
     );
   };
   
