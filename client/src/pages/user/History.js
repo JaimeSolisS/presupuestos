@@ -1,7 +1,11 @@
 import React from 'react'
+import UserNav from '../../components/nav/UserNav'
 
 const History = () => (
-    <div>User page</div>
+    <div>
+        <UserNav/>
+        User page
+    </div>
 
 )
 
