@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { Menu } from 'antd';
-import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined} from '@ant-design/icons';
+import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 import {Link}  from 'react-router-dom'
 
 import firebase from 'firebase'
@@ -45,7 +45,7 @@ const Header = () => {
 
             <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
         <Item key="home" icon={<HomeOutlined />}>
-            <Link to = "/">Home</Link>
+            <Link to = "/">Inicio</Link>
         </Item>
 
         {!user && (
@@ -70,11 +70,30 @@ const Header = () => {
         )
         }
         
-       
+        <Item key="presupuestos" icon={<ShoppingCartOutlined />} className="float-right">
+            <Link to = "/">Presupuestos</Link>
+        </Item>
 
+        <Item key="others" className="float-right">
+            <Link to = "/">Otros</Link>
+        </Item>
+        
+        <Item key="paper" className="float-right">
+            <Link to = "/">Papeleria</Link>
+        </Item>
+        
+        <Item key="printing" className="float-right">
+            <Link to = "/">Impresiones</Link>
+        </Item>
+        
+        <Item key="ink" className="float-right">
+            <Link to = "/">Serigrafía</Link>
+        </Item>
 
-     
-      
+        <Item key="clothing" className="float-right">
+            <Link to = "/">Ropa</Link>
+        </Item>
+
       </Menu>      
     )
 }
