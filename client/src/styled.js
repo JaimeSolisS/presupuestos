@@ -39,6 +39,14 @@ export const StyledDivFormGroup = styled.div `
  margin-bottom: 1rem;
  `;
 
+export const StyledGridContainer = styled.div `
+display: grid;
+justify-content: space-evenly;
+grid-template-columns: auto auto auto;
+grid-gap: 10px;
+padding: 10px;
+`;
+
 export const StyledInputFormControl = styled.input `
  bdisplay: block;
  width: 100%;
@@ -105,4 +113,10 @@ background-color: white;
   &:disabled {
       box-shadow: none;
       opacity: 0.3;
+ `;
+
+ export const StyledH4 = styled.h4 `
+ text-align: center;
+ text-decoration: none;
+ color: black;
  `;

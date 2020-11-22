@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { Menu } from 'antd';
-import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined} from '@ant-design/icons';
+import { Menu} from 'antd';
+import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined, SearchOutlined} from '@ant-design/icons';
 import {Link}  from 'react-router-dom'
 
 import firebase from 'firebase'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
- 
 const {SubMenu, Item} = Menu; //Menu.SubMenu, Menu.Item
 
     const StyledItem = styled(Menu.Item)`
@@ -39,11 +38,12 @@ const Header = () => {
         history.push('/');
 
     };
+    
 
     //cambiar a mostrar el nombre y no el correo 
     return (
 
-            <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
         <Item key="home" icon={<HomeOutlined />}>
             <Link to = "/">Inicio</Link>
         </Item>
@@ -93,7 +93,7 @@ const Header = () => {
         <Item key="clothing" className="float-right">
             <Link to = "/">Ropa</Link>
         </Item>
-
+        
       </Menu>      
     )
 }
