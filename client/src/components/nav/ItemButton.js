@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {EyeOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 import {HorizontalDiv, Spacer} from '../../styled'
-const StyledButton = styled.button`
+const StyledButton = styled.button `
 border: none;
 width: 100%;
 height: 100%;
@@ -56,6 +56,9 @@ background-color: white;
 
 const ItemButton = (props) => {
     const {image, name} = props;
+    let admin = false;
+    let [visible, setVisible] = useState(false)
+
     function toProduct(e) {
         e.preventDefault();
         console.log('The button was clicked.');
@@ -63,16 +66,26 @@ const ItemButton = (props) => {
     function hidden(e){
         e.preventDefault();
         e.stopPropagation();
-        console.log('Visible clicked.');
+        setVisible(!visible);
+        console.log(visible);
     }
 
     return (
         <StyledButton onClick={toProduct}>
-            <HorizontalDiv>
-                <StyledVisible onClick={hidden}>
-                    <EyeOutlined />
-                </StyledVisible>
-            </HorizontalDiv>
+            {admin && (
+                <HorizontalDiv>
+                    <StyledVisible onClick={hidden}>
+                        {visible && (
+                            <EyeOutlined/>
+                        )}
+                        {!visible && (
+                            <EyeInvisibleOutlined/>
+                        )}
+                        
+                    </StyledVisible>
+                </HorizontalDiv>
+            )}
+            
         
             <Spacer></Spacer>
             
