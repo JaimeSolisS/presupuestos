@@ -120,3 +120,9 @@ background-color: white;
  text-decoration: none;
  color: black;
  `;
+ export const HorizontalDiv = styled.div `
+width: 100%;
+`;
+export const Spacer = styled.div `
+flex-grow: 1;
+`;
