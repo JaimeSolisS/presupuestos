@@ -94,6 +94,10 @@ const Header = () => {
             <Link to = "/">Ropa</Link>
         </Item>
         
+        <Item key="newProduct" className="float-right">
+            <Link to = "/NewProduct">Agregar Producto</Link>
+        </Item>
+        
       </Menu>      
     )
 }
