@@ -1,9 +1,10 @@
 const User = require('../models/user')
 
 exports.createOrUpdateUser = async (request, response) => {
-    const {email} = request.user; 
+    const {name, email} = request.user; 
 
-    const user = await User.findOneAndUpdate({email: email}, {new: true})
+    const user = await User.findOneAndUpdate(
+        {email: email}, {name}, {new: true})
 
     if (user) {
         console.log('User update', user)
@@ -11,7 +12,8 @@ exports.createOrUpdateUser = async (request, response) => {
     } else {
         console.log('User create', user)
         const newUser = await new User({
-            email, 
+            email,
+            name: email.split("@")[0], 
         }).save();
         response.json(newUser); 
     }

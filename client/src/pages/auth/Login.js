@@ -1,13 +1,13 @@
-import { Button } from 'antd';
 import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
-import {auth} from '../../firebase'
+import {auth, googleAuthProvider} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {createOrUpdateUser} from "../../functions/auth"
+import {MailOutlined, GoogleOutlined} from "@ant-design/icons"
 import {StyledContainer, StyledDivRow, StyledInputFormControl, 
-    StyledDivFormGroup, StyledDivColOffSet, StyledMailButton} from '../../styled'
+    StyledDivFormGroup, StyledDivColOffSet, StyledMailButton, StyledGoogleButton} from '../../styled'
+
 
  const Login = ({history}) => {  
      const [email, setEmail] = useState("");
@@ -37,7 +37,7 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
         //console.table(email, password)
         setLoading(true); 
         try {
-        const result = await auth.signInWithEmailAndPassword(email, password); 
+        const result = await auth.signInWithEmailAndPassword(email.trim(), password); 
         //console.log(result)
         const {user} = result
         const idTokenResult = await user.getIdTokenResult()
@@ -48,7 +48,7 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
                 type: 'LOGGED_IN_USER', 
                 payload: {
                   name: response.data.name,
-                  email: user.email, 
+                  email: response.data.email, 
                   token: idTokenResult.token, 
                   role: response.data.role,
                   _id: response.data.id,
@@ -60,11 +60,40 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
         //history.push('/')
         
         } catch (error){
-            //console.log(error)
+            console.log(error)
             toast.error(error.message)
             setLoading(false);
         }
         };
+
+        const googleLogin = async () => {
+            auth
+              .signInWithPopup(googleAuthProvider)
+              .then(async (result) => {
+                const { user } = result;
+                const idTokenResult = await user.getIdTokenResult();
+                createOrUpdateUser(idTokenResult.token)
+                  .then((response) => {
+                    dispatch({
+                      type: "LOGGED_IN_USER",
+                      payload: {
+                        name: response.data.name,
+                        email: response.data.email,
+                        token: idTokenResult.token,
+                        role: response.data.role,
+                        _id: response.data._id,
+                      },
+                    });
+                    roleBasedRedirect(response);
+                  })
+                  .catch((error) => console.log(error));
+                // history.push("/");
+              })
+              .catch((error) => {
+                console.log(error);
+                toast.error(error.message);
+              });
+          };
   
     const loginForm = () => (
         <form onSubmit={handleSubmit}>
@@ -92,8 +121,15 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
         <StyledMailButton 
         onClick={handleSubmit} 
         disabled={!email || password.length < 6}>
-            ENTRAR
+             <span><MailOutlined/> Entrar </span>
         </StyledMailButton>
+
+        <StyledGoogleButton 
+        onClick={googleLogin}>
+            <span><GoogleOutlined/> Entrar con Google</span>
+        </StyledGoogleButton>
+
+        
 
         <Link to= "forgot/password" className="float-right text-danger">¿Olvidaste tu Contraseña?</Link>
        

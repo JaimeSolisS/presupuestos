@@ -83,7 +83,24 @@ export const StyledMailButton = styled.button `
  border:1px solid rgba(0, 0, 0, 0.26);
  background: #037dff;
  transition-duration: 0.4s;
+ 
+ &:disabled {
+    background: #F1F1F1;
+    color: rgba(0, 0, 0, 0.26);
+    transition-duration: 0.4s;
+ }
+ `;
 
+export const StyledGoogleButton = styled.button `
+ width: 100%;
+ border-radius: 20px;
+ margin-bottom: 1rem !important;
+ padding: 1%;
+ color:white;
+ border:1px solid rgba(0, 0, 0, 0.26);
+ background: #dc3545;
+ transition-duration: 0.4s;
+ 
  &:disabled {
     background: #F1F1F1;
     color: rgba(0, 0, 0, 0.26);
@@ -115,12 +132,12 @@ background-color: white;
       opacity: 0.3;
  `;
 
- export const StyledH4 = styled.h4 `
+export const StyledH4 = styled.h4 `
  text-align: center;
  text-decoration: none;
  color: black;
  `;
- export const HorizontalDiv = styled.div `
+export const HorizontalDiv = styled.div `
 width: 100%;
 `;
 export const Spacer = styled.div `
