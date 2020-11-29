@@ -71,7 +71,7 @@ const Header = () => {
         }
         
         <Item key="presupuestos" icon={<ShoppingCartOutlined />} className="float-right">
-            <Link to = "/">Presupuestos</Link>
+            <Link to = "/cart">Presupuestos</Link>
         </Item>
 
         <Item key="others" className="float-right">
