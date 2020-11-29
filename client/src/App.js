@@ -20,6 +20,8 @@ import Password from './pages/user/Password'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminRoute from './components/routes/AdminRoute'
 
+import Cart from './pages/Cart'
+
 import {auth} from './firebase'
 import {useDispatch} from 'react-redux'
 import {currentUser} from './functions/auth'
@@ -70,6 +72,8 @@ const App = () => {
       <UserRoute exact path="/user/history" component={History}/>
       <UserRoute exact path="/user/password" component={Password}/>
       <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+
+      <Route exact path='/cart' component={Cart} />
     </Switch>
   </>
   )
