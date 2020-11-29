@@ -8,7 +8,10 @@ const productSchema = new mongoose.Schema({
     },
     name: String,
     description: String,
-    image: ImageBitmap,
+    image: {
+        type: String,
+        default: null
+    },
     category: {
         type: String,
         default: "otros"

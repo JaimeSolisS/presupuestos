@@ -8,6 +8,10 @@ const budgetSchema = new mongoose.Schema({
     },
     name: String,
     total: Number,
+    date: {
+        type: Date,
+        default: Date.now
+    },
     userMail: {
         type: ObjectId,
         ref: "User"
