@@ -143,3 +143,36 @@ width: 100%;
 export const Spacer = styled.div `
 flex-grow: 1;
 `;
+
+export const Column = styled.div `
+    flex: ${(props) => props.size};
+    padding-right: ${(props) => props.paddingRight ? props.paddingRight : "0px" };
+  `
+
+export const Row = styled.div `
+  display: flex;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+`;
+
+export const TextRight = styled.p `
+  text-align: right;
+  margin-top: 10px;
+  padding-right: 15px;
+`;
+
+export const GenericButton = styled.button `
+  border-radius: 20px;
+  margin-bottom: 1rem !important;
+  padding: 1%;
+  color:white;
+  border:1px solid rgba(0, 0, 0, 0.26);
+  background: #1890ff;
+  transition-duration: 0.4s;
+  
+  &:disabled {
+      background: #F1F1F1;
+      color: rgba(0, 0, 0, 0.26);
+      transition-duration: 0.4s;
+  }
+`;

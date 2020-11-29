@@ -1,108 +1,181 @@
 import React, {useState} from 'react'
 import styled from "styled-components";
-import {StyledContainer, StyledInputFormControl, HorizontalDiv, Spacer} from '../styled'
+import {StyledContainer, StyledInputFormControl, HorizontalDiv, Spacer, Column, Row, TextRight, GenericButton} from '../styled'
 import AddImageButton from '../components/nav/AddImageButton'
 
-  const Column = styled.div `
-    flex: ${(props) => props.size};
-    padding-right: ${(props) => props.paddingRight ? props.paddingRight : "0px" };
-  `
-
-  const Row = styled.div `
-    display: flex;
-    margin-bottom: 15px;
-  `;
-
-  const TextRight = styled.p `
-    text-align: right;
-    margin-top: 10px;
-    padding-right: 15px;
-  `;
-
-  const AddProduct = styled.button `
-
-  `
-
+const MainRow = styled.div `
+  display: flex;
+  min-width: 100px;
+`
+const ImageRow = styled.div `
+  min-width: 200px;
+`
 
 const NewProduct = () => {
 
-  var producto = {};
+  const [nombre, setNombre] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [precioMin, setPrecioMin] = useState("");
+  const [precio, setPrecio] = useState("");
+
+  
+
+  function addProduct(e) {
+    e.preventDefault();
+    var sendToDB = {
+      nombre:           nombre,
+      categoria:        categoria,
+      descripcion:      descripcion,
+      tipo:             tipo,
+      precioMin:        precioMin,
+      precio:           precio
+    };
+    console.log(sendToDB);
+  };
+
+  // const handleAdd = async (e) => {
+  //   e.preventDefault(); 
+  //   //console.table(email, password)
+  //   setLoading(true); 
+  //   try {
+  //   const result = await auth.signInWithEmailAndPassword(email.trim(), password); 
+  //   //console.log(result)
+  //   const {user} = result
+  //   const idTokenResult = await user.getIdTokenResult()
+
+  //   createOrUpdateUser(idTokenResult.token)
+  //   .then((response) => {
+  //       dispatch({
+  //           type: 'LOGGED_IN_USER', 
+  //           payload: {
+  //             name: response.data.name,
+  //             email: response.data.email, 
+  //             token: idTokenResult.token, 
+  //             role: response.data.role,
+  //             _id: response.data.id,
+  //           },
+  //         });
+  //         roleBasedRedirect(response) 
+  //   })
+  //   .catch(error => console.log(error));
+  //   //history.push('/')
+    
+  //   } catch (error){
+  //       console.log(error)
+  //       toast.error(error.message)
+  //       setLoading(false);
+  //   }
+  // };
+
+  const AddItemForm = () => (
+    <form onSubmit={addProduct}>
+      <StyledContainer>
+        <Row>
+          <Column size="2" paddingRight="5%">
+            <MainRow>
+              <StyledInputFormControl
+                type="text"
+                value={nombre}
+                onChange={e => setNombre(e.target.value)}
+                placeholder= "Nombre del producto"
+              ></StyledInputFormControl>
+            </MainRow>
+            <Row>
+              <Column size="1">
+                <TextRight>
+                  Categoría
+                </TextRight>
+
+              </Column>
+              <Column size="1">
+                <StyledInputFormControl
+                  type="text"
+                  value={categoria}
+                  onChange={e => setCategoria(e.target.value)}
+                  placeholder= "categoría"
+                ></StyledInputFormControl>
+              </Column>
+            </Row>
+            <Row>
+              <StyledInputFormControl
+                type="text"
+                value={descripcion}
+                onChange={e => setDescripcion(e.target.value)}
+                placeholder= "Descripcion"
+              ></StyledInputFormControl>
+            </Row>
+            <Row>
+              <Column size="1">
+                <TextRight>
+                  Tipo
+                </TextRight>
+
+              </Column>
+              <Column size="1">
+                <StyledInputFormControl
+                  type="text"
+                  value={tipo}
+                  onChange={e => setTipo(e.target.value)}
+                  placeholder= "tipo"
+                ></StyledInputFormControl>
+              </Column>
+            </Row>
+            <Row>
+              <Column size="1">
+                <TextRight>
+                  Precio mínimo
+                </TextRight>
+              </Column>
+              <Column size="1">
+                <StyledInputFormControl
+                  type="text"
+                  value={precioMin}
+                  onChange={e => setPrecioMin(e.target.value)}
+                  placeholder= "min"
+                ></StyledInputFormControl>
+              </Column>
+            </Row>
+            <Row>
+              <Column size="1">
+                <TextRight>
+                  Precio
+                </TextRight>
+              </Column>
+              <Column size="1">
+                <StyledInputFormControl
+                  type="text"
+                  value={precio}
+                  onChange={e => setPrecio(e.target.value)}
+                  placeholder= "tipo"
+                ></StyledInputFormControl>
+              </Column>
+            </Row>
+            <Row>
+              <Spacer></Spacer>
+              <GenericButton onClick={addProduct}>
+                Crear producto
+              </GenericButton>
+            </Row>
+          </Column>
+
+          <Column size="1">
+              <ImageRow>
+                <Spacer></Spacer>
+                <AddImageButton name="Prueba" image="https://img.pngio.com/free-png-plus-sign-transparent-plus-signpng-images-pluspng-plus-sign-transparent-background-512_512.png"></AddImageButton>
+                <Spacer></Spacer>
+              </ImageRow>
+          </Column>
+        </Row>
+      </StyledContainer>
+    </form>
+  );
+
+
 
   return (
-    <StyledContainer>
-      <Row>
-        <Column size="2" paddingRight="5%">
-          <Row>
-            <StyledInputFormControl
-              type="text"
-              value={producto.nombre}
-              placeholder= "Nombre del producto"
-            ></StyledInputFormControl>
-          </Row>
-          <Row>
-            <Column size="1">
-              <TextRight>
-                Categoría
-              </TextRight>
-
-            </Column>
-            <Column size="1">
-              <StyledInputFormControl
-                type="text"
-                value={producto.categoria}
-                placeholder= "categoría"
-              ></StyledInputFormControl>
-            </Column>
-          </Row>
-          <Row>
-            <Column size="1">
-              <TextRight>
-                Tipo
-              </TextRight>
-
-            </Column>
-            <Column size="1">
-              <StyledInputFormControl
-                type="text"
-                value={producto.tipo}
-                placeholder= "tipo"
-              ></StyledInputFormControl>
-            </Column>
-          </Row>
-          <Row>
-            <StyledInputFormControl
-              type="text"
-              value={producto.nombre}
-              placeholder= "Descripcion"
-            ></StyledInputFormControl>
-          </Row>
-          <Row>
-            <Column size="1">
-              <TextRight>
-                Precio mínimo
-              </TextRight>
-            </Column>
-            <Column size="1">
-              <StyledInputFormControl
-                type="text"
-                value={producto.precioMin}
-                placeholder= "tipo"
-              ></StyledInputFormControl>
-            </Column>
-          </Row>
-          <Row>
-            <AddProduct/>
-          </Row>
-
-        </Column>
-
-        <Column size="1">
-          <AddImageButton name="Prueba" image="https://img.pngio.com/free-png-plus-sign-transparent-plus-signpng-images-pluspng-plus-sign-transparent-background-512_512.png"></AddImageButton>
-          {/* <PictureOutlined style={{ width: '100%', height: '100%', backgroundColor: 'plum' }}/> */}
-        </Column>
-      </Row>
-
-    </StyledContainer>
+    <AddItemForm></AddItemForm>
   )
  }
 

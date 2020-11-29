@@ -20,6 +20,7 @@ import Password from './pages/user/Password'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminRoute from './components/routes/AdminRoute'
 import NewProduct from './pages/NewProduct'
+import Product from './pages/Product'
 
 import Cart from './pages/Cart'
 
@@ -67,6 +68,7 @@ const App = () => {
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/login" component={Login}/>
+      <Route exact path="/Product" component={Product}/>
       <Route exact path="/NewProduct" component={NewProduct}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/register/complete" component={RegisterComplete}/>
