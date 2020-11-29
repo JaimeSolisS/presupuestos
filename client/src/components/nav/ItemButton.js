@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {EyeOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 import {HorizontalDiv, Spacer} from '../../styled'
+import {useSelector} from 'react-redux'
 const StyledButton = styled.button `
 border: none;
 width: 100%;
@@ -56,7 +57,16 @@ background-color: white;
 
 const ItemButton = (props) => {
     const {image, name} = props;
+    let {user} = useSelector((state) => ({...state}));
     let admin = false;
+    if(user){
+        if(user.role == "customer"){
+            admin = false;
+        }else if (user.role == "admin"){
+            admin = true;
+        }
+    }
+    
     let [visible, setVisible] = useState(false)
 
     function toProduct(e) {
@@ -67,7 +77,6 @@ const ItemButton = (props) => {
         e.preventDefault();
         e.stopPropagation();
         setVisible(!visible);
-        console.log(visible);
     }
 
     return (
