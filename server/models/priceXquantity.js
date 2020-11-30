@@ -1,10 +1,8 @@
-const {ObjectId} = mongoose.Schema
 const mongoose = require('mongoose')
-
+const {ObjectId} = mongoose.Schema
 const priceXquantitySchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true,
         index: true,
     },
     price: Number,
