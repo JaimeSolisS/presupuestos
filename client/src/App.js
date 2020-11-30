@@ -81,7 +81,7 @@ const App = () => {
 
       <Route exact path='/cart' component={Cart} />
     </Switch>
-  </>
+  </> 
   )
 }
 
