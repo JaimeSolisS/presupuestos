@@ -20,7 +20,14 @@ const Header = () => {
 
     let dispatch = useDispatch();
     let {user} = useSelector((state) => ({...state}));
-
+    let admin = false;
+    if(user){
+        if(user.role == "customer"){
+            admin = false;
+        }else if (user.role == "admin"){
+            admin = true;
+        }
+    }
 
     let history = useHistory();
 
@@ -70,10 +77,16 @@ const Header = () => {
         )
         }
         
+        {admin && (
+            <Item key="newProduct" className="float-right">
+                <Link to = "/NewProduct">Agregar Producto</Link>
+            </Item>
+        )}
+        
         <Item key="presupuestos" icon={<ShoppingCartOutlined />} className="float-right">
             <Link to = "/cart">Presupuestos</Link>
         </Item>
-
+        
         <Item key="others" className="float-right">
             <Link to = "/">Otros</Link>
         </Item>
@@ -92,13 +105,6 @@ const Header = () => {
 
         <Item key="clothing" className="float-right">
             <Link to = "/">Ropa</Link>
-        </Item>
-        
-        <Item key="newProduct" className="float-right">
-            <Link to = "/NewProduct">Agregar Producto</Link>
-        </Item>
-        <Item key="product" className="float-right">
-            <Link to = "/Product">Producto</Link>
         </Item>
         
       </Menu>      

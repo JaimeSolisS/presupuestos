@@ -35,41 +35,7 @@ const NewProduct = () => {
     console.log(sendToDB);
   };
 
-  // const handleAdd = async (e) => {
-  //   e.preventDefault(); 
-  //   //console.table(email, password)
-  //   setLoading(true); 
-  //   try {
-  //   const result = await auth.signInWithEmailAndPassword(email.trim(), password); 
-  //   //console.log(result)
-  //   const {user} = result
-  //   const idTokenResult = await user.getIdTokenResult()
-
-  //   createOrUpdateUser(idTokenResult.token)
-  //   .then((response) => {
-  //       dispatch({
-  //           type: 'LOGGED_IN_USER', 
-  //           payload: {
-  //             name: response.data.name,
-  //             email: response.data.email, 
-  //             token: idTokenResult.token, 
-  //             role: response.data.role,
-  //             _id: response.data.id,
-  //           },
-  //         });
-  //         roleBasedRedirect(response) 
-  //   })
-  //   .catch(error => console.log(error));
-  //   //history.push('/')
-    
-  //   } catch (error){
-  //       console.log(error)
-  //       toast.error(error.message)
-  //       setLoading(false);
-  //   }
-  // };
-
-  const AddItemForm = () => (
+  return (
     <form onSubmit={addProduct}>
       <StyledContainer>
         <Row>
@@ -170,12 +136,6 @@ const NewProduct = () => {
         </Row>
       </StyledContainer>
     </form>
-  );
-
-
-
-  return (
-    <AddItemForm></AddItemForm>
   )
  }
 
