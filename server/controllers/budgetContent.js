@@ -12,3 +12,14 @@ exports.findContentByBudgetId = async (request, response) => {
         response.json(content);
     })
 }
+
+exports.deleteContent = async (request,response) => {
+    const {budgetId} = request.body;
+    const content = await Content.deleteMany({budgetId: budgetId});
+    if (content) {
+        console.log('Content deleted', content);
+        response.status(202).json(content);
+    } else {
+        return response.sendStatus(404);
+    }
+}
