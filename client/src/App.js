@@ -21,6 +21,7 @@ import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminRoute from './components/routes/AdminRoute'
 import NewProduct from './pages/NewProduct'
 import Product from './pages/Product'
+import CategoryCreate from './pages/admin/category/CategoryCreate'
 
 import Cart from './pages/Cart'
 
@@ -76,6 +77,7 @@ const App = () => {
       <UserRoute exact path="/user/history" component={History}/>
       <UserRoute exact path="/user/password" component={Password}/>
       <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+      <AdminRoute exact path="/admin/category" component={CategoryCreate}/>
 
       <Route exact path='/cart' component={Cart} />
     </Switch>

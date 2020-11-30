@@ -5,11 +5,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {createOrUpdateUser} from "../../functions/auth"
 import {MailOutlined, GoogleOutlined} from "@ant-design/icons"
-import {StyledContainer, StyledDivRow, StyledInputFormControl, 
+import {StyledContainer, StyledDivRow, StyledInputFormControl,
     StyledDivFormGroup, StyledDivColOffSet, StyledMailButton, StyledGoogleButton} from '../../styled'
 
 
- const Login = ({history}) => {  
+ const Login = ({history}) => {
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
      const [loading, setLoading] = useState(false);
@@ -28,28 +28,25 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
      let dispatch = useDispatch();
 
      const roleBasedRedirect = (response) => {
-         let intended = history.location.state; 
+         let intended = history.location.state;
          if (intended) {
              history.push(intended.from);
          } else {
-          history.push("/");
-          /*  
-          if (response.data.role === 'admin') {
-           history.push("/admin/dashboard"); 
-          } else {
-            history.push('/home');  //TEST
-          }
-         */
+            if (response.data.role === 'admin') {
+                history.push("/admin/dashboard");
+            } else {
+                history.push('/home');  //TEST
+            }
          }
     }
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         //console.table(email, password)
-        setLoading(true); 
+        setLoading(true);
         try {
-        const result = await auth.signInWithEmailAndPassword(email, password); 
+        const result = await auth.signInWithEmailAndPassword(email, password);
         //console.log(result)
         const {user} = result
         const idTokenResult = await user.getIdTokenResult()
@@ -57,20 +54,20 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
         createOrUpdateUser(idTokenResult.token)
         .then((response) => {
             dispatch({
-                type: 'LOGGED_IN_USER', 
+                type: 'LOGGED_IN_USER',
                 payload: {
                   name: response.data.name,
-                  email: response.data.email, 
-                  token: idTokenResult.token, 
+                  email: response.data.email,
+                  token: idTokenResult.token,
                   role: response.data.role,
                   _id: response.data.id,
                 },
               });
-              roleBasedRedirect(response) 
+              roleBasedRedirect(response)
         })
         .catch(error => console.log(error));
         //history.push('/')
-        
+
         } catch (error){
             console.log(error)
             toast.error(error.message)
@@ -106,14 +103,14 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
                 toast.error(error.message);
               });
           };
-  
+
     const loginForm = () => (
         <form onSubmit={handleSubmit}>
 
         <StyledDivFormGroup>
-            <StyledInputFormControl 
-            type="email" 
-            value={email} 
+            <StyledInputFormControl
+            type="email"
+            value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder= "Correo"
             autoFocus/>
@@ -121,8 +118,8 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
 
         <StyledDivFormGroup>
             <StyledInputFormControl
-             type="password" 
-             value={password} 
+             type="password"
+             value={password}
              onChange={e => setPassword(e.target.value)}
              placeholder='Contraseña'
             />
@@ -130,21 +127,21 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
 
        <br/>
 
-        <StyledMailButton 
-        onClick={handleSubmit} 
+        <StyledMailButton
+        onClick={handleSubmit}
         disabled={!email || password.length < 6}>
              <span><MailOutlined/> Entrar </span>
         </StyledMailButton>
 
-        <StyledGoogleButton 
+        <StyledGoogleButton
         onClick={googleLogin}>
             <span><GoogleOutlined/> Entrar con Google</span>
         </StyledGoogleButton>
 
-        
+
 
         <Link to= "forgot/password" className="float-right text-danger">¿Olvidaste tu Contraseña?</Link>
-       
+
     </form>
 );
      return (
@@ -153,7 +150,7 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
             <StyledDivColOffSet>
                 {loading ? (<h4 className="text-danger">Espere...</h4>) :
                 (<h4>Iniciar Sesión</h4>)}
-                    {loginForm()}           
+                    {loginForm()}
                 </StyledDivColOffSet>
            </StyledDivRow>
         </StyledContainer>
