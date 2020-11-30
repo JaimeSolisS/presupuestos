@@ -85,12 +85,6 @@ const Header = () => {
         )
         }
         
-        {admin && (
-            <Item key="newProduct" className="float-right">
-                <Link to = "/NewProduct">Agregar Producto</Link>
-            </Item>
-        )}
-        
         <Item key="presupuestos" icon={<ShoppingCartOutlined />} className="float-right">
             <Link to = "/cart">Presupuestos</Link>
         </Item>

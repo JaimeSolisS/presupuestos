@@ -35,7 +35,7 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
             if (response.data.role === 'admin') {
                 history.push("/admin/dashboard");
             } else {
-                history.push('/home');  //TEST
+                history.push('/');  //TEST
             }
          }
     }

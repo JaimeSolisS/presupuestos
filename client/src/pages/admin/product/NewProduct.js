@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import styled from "styled-components";
-import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../styled'
-import AddImageButton from '../components/nav/AddImageButton'
+import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../../../styled'
+import AddImageButton from '../../../components/nav/AddImageButton'
+import AdminNav from '../../../components/nav/AdminNav'
 
 const MainRow = styled.div `
   display: flex;
@@ -22,6 +23,9 @@ const NewProduct = () => {
   const [precioCm, setPrecioCm] = useState("");
   const [picture, setPicture] = useState("");
   const [showPic, setShowPicture] = useState("");
+
+  // redux
+  const { user } = useSelector((state) => ({ ...state }));
 
   function addProduct(e) {
     e.preventDefault();
@@ -56,7 +60,12 @@ const NewProduct = () => {
   );
 
   return (
-    <form onSubmit={addProduct}>
+    <div className='container-fluid'>
+      <div className='row'>
+        <div className= 'col-md-2'>
+          <AdminNav/>
+        </div>
+        <form onSubmit={addProduct}>
       <StyledContainer>
         <Row>
           <Column size="2" paddingRight="5%">
@@ -228,6 +237,8 @@ const NewProduct = () => {
         </Row>
       </StyledContainer>
     </form>
+      </div>
+    </div>
   )
  }
 

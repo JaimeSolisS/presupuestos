@@ -19,7 +19,7 @@ import UserRoute from './components/routes/UserRoute'
 import Password from './pages/user/Password'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminRoute from './components/routes/AdminRoute'
-import NewProduct from './pages/NewProduct'
+import NewProduct from './pages/admin/product/NewProduct'
 import Product from './pages/Product'
 import CategoryCreate from './pages/admin/category/CategoryCreate'
 
@@ -70,7 +70,6 @@ const App = () => {
       <Route exact path="/" component={Home}/>
       <Route exact path="/login" component={Login}/>
       <Route exact path="/Product" component={Product}/>
-      <Route exact path="/NewProduct" component={NewProduct}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/register/complete" component={RegisterComplete}/>
       <Route exact path="/forgot/password" component={ForgotPassword}/>
@@ -78,6 +77,7 @@ const App = () => {
       <UserRoute exact path="/user/password" component={Password}/>
       <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
       <AdminRoute exact path="/admin/category" component={CategoryCreate}/>
+      <AdminRoute exact path="/admin/product/NewProduct" component={NewProduct}/>
 
       <Route exact path='/cart' component={Cart} />
     </Switch>
