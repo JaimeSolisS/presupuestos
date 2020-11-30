@@ -8,6 +8,7 @@ import {
   removeCategory,
 } from "../../../functions/category";
 import {DeleteOutlined } from "@ant-design/icons";
+import LocalSearch from "../../../components/forms/LocalSearch";
 
 const CategoryCreate = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -15,6 +16,9 @@ const CategoryCreate = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+
+  // 1) add the state keyword
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     loadCategories();
@@ -78,6 +82,9 @@ const CategoryCreate = () => {
     </form>
   );
 
+   // step 4 create funnction to use on map
+   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -92,14 +99,18 @@ const CategoryCreate = () => {
           )}
           {categoryForm()}
           <hr />
-          {categories.map((c) => (
+            {/* step 2 input field and step 3 handle onchange*/}
+            <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+            {/* step 5 use function between map */}
+            {categories.filter(searched(keyword)).map((c) => (
             <div className="alert alert-secondary" key={c._id}>
               {c.name}
               <span
                 onClick={() => handleRemove(c.slug)}
                 className="btn btn-sm float-right"
               >
-                <DeleteOutlined className="text-danger" />
+                    <DeleteOutlined className="text-danger" />
               </span>
             </div>
           ))}
