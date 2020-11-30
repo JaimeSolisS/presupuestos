@@ -151,7 +151,7 @@ const NewProduct = () => {
                     type="text"
                     value={precio}
                     onChange={e => setPrecio(e.target.value)}
-                    placeholder= "tipo"
+                    placeholder= "precio"
                   ></StyledInputFormControl>
                 </Column>
               </Row>
@@ -204,7 +204,8 @@ const NewProduct = () => {
                   descripcion.length < 1 ||
                   (tipo === "unitario" && precio <= 0) ||
                   (tipo === "area" && precioCm <= 0) ||
-                  tipo === ""
+                  tipo === "" ||
+                  picture.length < 10
                 }
               >
                 Crear producto
