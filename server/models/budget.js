@@ -3,20 +3,21 @@ const {ObjectId} = mongoose.Schema
 const budgetSchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true,
         index: true,
     },
     name: String,
-    total: Number,
+    total: {
+        type: Number,
+        default: 0
+    },
     date: {
         type: Date,
         default: Date.now
     },
-    userMail: {
+    userId: {
         type: ObjectId,
         ref: "User"
-
     }
-}, { timestamps: true });
+});
 
 module.exports = mongoose.model('Budget', budgetSchema);
