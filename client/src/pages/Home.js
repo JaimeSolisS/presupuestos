@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {StyledContainer, StyledH4, StyledInputFormControl, StyledGridContainer} from '../styled'
 import ItemButton from '../components/nav/ItemButton'
-import { getAllProducts } from "../functions/product";
-import LocalSearch from "../components/forms/LocalSearch";
+import { getAllProducts } from '../functions/product';
+import LocalSearch from '../components/forms/LocalSearch';
 
  const Home = () => {
     const [search, setSearch] = useState("");
@@ -17,7 +17,11 @@ import LocalSearch from "../components/forms/LocalSearch";
     
       const loadAllProducts = () => {
         getAllProducts().then((res) => {
-          setProducts(res.data);
+          console.log(res)
+          if(res){
+            setProducts(res.data);
+          }
+          return
         });
       };
 
