@@ -3,7 +3,6 @@ const {ObjectId} = mongoose.Schema
 const priceAreaSchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true,
         index: true,
     },
     minPrice: Number,
