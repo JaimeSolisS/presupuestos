@@ -1,10 +1,8 @@
 import React from 'react'
-
+import Home from '../Home'
 const AdminDashboard = () => {
     return (
-        <>
-        <p>Admin page</p>
-        </>
+        <Home/>
     )
 }
 

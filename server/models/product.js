@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 const productSchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true,
-        index: true,
+        index: true
     },
     name: String,
     description: String,
@@ -18,7 +17,7 @@ const productSchema = new mongoose.Schema({
     },
     hidden: {
         type: Boolean,
-        default: true
+        default: false
     }
 });
 
