@@ -32,11 +32,14 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
          if (intended) {
              history.push(intended.from);
          } else {
-            if (response.data.role === 'admin') {
-                history.push("/admin/dashboard"); 
-            } else {
-                history.push('/user/history');  //TEST
-            }
+          history.push("/");
+          /*  
+          if (response.data.role === 'admin') {
+           history.push("/admin/dashboard"); 
+          } else {
+            history.push('/home');  //TEST
+          }
+         */
          }
     }
 
