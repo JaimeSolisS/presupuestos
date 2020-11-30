@@ -72,7 +72,6 @@ const AddImageButton = (props) => {
             
             <Spacer></Spacer>
             <HorizontalDiv>
-                Agregar imagen
             </HorizontalDiv>
             
         </StyledButton>

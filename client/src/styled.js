@@ -169,10 +169,38 @@ export const GenericButton = styled.button `
   border:1px solid rgba(0, 0, 0, 0.26);
   background: #1890ff;
   transition-duration: 0.4s;
-  
+  padding-left: 10px;
+  padding-right: 10px;
+
   &:disabled {
       background: #F1F1F1;
       color: rgba(0, 0, 0, 0.26);
       transition-duration: 0.4s;
+  }
+`;
+
+export const ProductLabel = styled.p `
+  font-weight: bold;
+  margin-bottom: 0px;
+`
+
+export const GenericSelect = styled.select`
+  height: 35px;
+  background: white;
+  color: black;
+  padding-left: 5px;
+  font-size: 14px;
+  border: 1px solid #DDD;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top:5px;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
   }
 `;

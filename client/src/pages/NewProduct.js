@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from "styled-components";
-import {StyledContainer, StyledInputFormControl, HorizontalDiv, Spacer, Column, Row, TextRight, GenericButton} from '../styled'
+import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../styled'
 import AddImageButton from '../components/nav/AddImageButton'
 
 const MainRow = styled.div `
@@ -19,8 +19,9 @@ const NewProduct = () => {
   const [tipo, setTipo] = useState("");
   const [precioMin, setPrecioMin] = useState("");
   const [precio, setPrecio] = useState("");
-
-  
+  const [precioCm, setPrecioCm] = useState("");
+  const [picture, setPicture] = useState("");
+  const [showPic, setShowPicture] = useState("");
 
   function addProduct(e) {
     e.preventDefault();
@@ -29,11 +30,30 @@ const NewProduct = () => {
       categoria:        categoria,
       descripcion:      descripcion,
       tipo:             tipo,
-      precioMin:        precioMin,
-      precio:           precio
+      precioMin:        (tipo === "unitario" ? null : precioMin),
+      precio:           (tipo === "area" ? null : precio),
+      precioCm:         (tipo === "unitario" ? null : precioCm),
+      picture:          picture
     };
     console.log(sendToDB);
   };
+
+  const handleUpdatePicture = e => {
+    e.preventDefault();
+    setPicture(e.target.value);
+    setShowPicture(picture);
+  }
+
+  const ProductImage = () => (
+    <img
+    src={showPic}
+    />
+  );
+  const ImagePlaceholder = () => (
+    <img
+    src={"https://wiki.tripwireinteractive.com/images/4/47/Placeholder.png"}
+    />
+  );
 
   return (
     <form onSubmit={addProduct}>
@@ -51,17 +71,20 @@ const NewProduct = () => {
             <Row>
               <Column size="1">
                 <TextRight>
-                  Categoría
+                  <ProductLabel>
+                    Categoría
+                  </ProductLabel>
                 </TextRight>
-
               </Column>
               <Column size="1">
-                <StyledInputFormControl
-                  type="text"
-                  value={categoria}
-                  onChange={e => setCategoria(e.target.value)}
-                  placeholder= "categoría"
-                ></StyledInputFormControl>
+                <GenericSelect onChange={e => setCategoria(e.target.value)}>
+                  <option value=""> --Seleccione categoría--</option>
+                  <option value="ropa">Ropa</option>
+                  <option value="serigrafia">Serigrafía</option>
+                  <option value="impresiones">Impresiones</option>
+                  <option value="papeleria">Papelería</option>
+                  <option value="otros">Otros</option>
+                </GenericSelect>
               </Column>
             </Row>
             <Row>
@@ -73,54 +96,117 @@ const NewProduct = () => {
               ></StyledInputFormControl>
             </Row>
             <Row>
-              <Column size="1">
+              <Column size="2">
                 <TextRight>
-                  Tipo
+                  <ProductLabel>
+                    URL de imagen
+                  </ProductLabel>
                 </TextRight>
-
               </Column>
               <Column size="1">
                 <StyledInputFormControl
                   type="text"
-                  value={tipo}
-                  onChange={e => setTipo(e.target.value)}
-                  placeholder= "tipo"
+                  value={picture}
+                  onChange={picture.length > 10 ? e => handleUpdatePicture(e) : e => setPicture(e.target.value)}
+                  placeholder= "url"
                 ></StyledInputFormControl>
+              </Column>
+              <Column size="1">
+                <GenericButton
+                  disabled={picture.length<10}
+                  onClick={e => setShowPicture(picture)}
+                  style={{marginLeft:"15px", float: "right"}}
+                >
+                  Previsualizar imagen
+                </GenericButton>
               </Column>
             </Row>
             <Row>
               <Column size="1">
                 <TextRight>
-                  Precio mínimo
+                  <ProductLabel>
+                    Tipo
+                  </ProductLabel>
                 </TextRight>
               </Column>
               <Column size="1">
-                <StyledInputFormControl
-                  type="text"
-                  value={precioMin}
-                  onChange={e => setPrecioMin(e.target.value)}
-                  placeholder= "min"
-                ></StyledInputFormControl>
+                <GenericSelect onChange={e => setTipo(e.target.value)}>
+                  <option value="" hidden> --Seleccione tipo--</option>
+                  <option value="unitario">Unitario</option>
+                  <option value="area">Área</option>
+                </GenericSelect>
               </Column>
             </Row>
-            <Row>
-              <Column size="1">
-                <TextRight>
-                  Precio
-                </TextRight>
-              </Column>
-              <Column size="1">
-                <StyledInputFormControl
-                  type="text"
-                  value={precio}
-                  onChange={e => setPrecio(e.target.value)}
-                  placeholder= "tipo"
-                ></StyledInputFormControl>
-              </Column>
-            </Row>
+            {tipo === "unitario" && (
+              <Row>
+                <Column size="1">
+                  <TextRight>
+                    <ProductLabel>
+                      Precio
+                    </ProductLabel>
+                  </TextRight>
+                </Column>
+                <Column size="1">
+                  <StyledInputFormControl
+                    type="text"
+                    value={precio}
+                    onChange={e => setPrecio(e.target.value)}
+                    placeholder= "tipo"
+                  ></StyledInputFormControl>
+                </Column>
+              </Row>
+            )}
+            {tipo === "area" && (
+              <div>
+                <Row>
+                  <Column size="1">
+                    <TextRight>
+                      <ProductLabel>
+                        Precio mínimo
+                      </ProductLabel>
+                    </TextRight>
+                  </Column>
+                  <Column size="1">
+                    <StyledInputFormControl
+                      type="text"
+                      value={precioMin}
+                      onChange={e => setPrecioMin(e.target.value)}
+                      placeholder= "min"
+                    ></StyledInputFormControl>
+                  </Column>
+                </Row>
+                <Row>
+                  <Column size="1">
+                    <TextRight>
+                      <ProductLabel>
+                        Precio por cm<sup>2</sup>
+                      </ProductLabel>
+                    </TextRight>
+                  </Column>
+                  <Column size="1">
+                    <StyledInputFormControl
+                      type="text"
+                      value={precioCm}
+                      onChange={e => setPrecioCm(e.target.value)}
+                      placeholder= "precio"
+                    ></StyledInputFormControl>
+                  </Column>
+                </Row>
+              </div>
+            )}
             <Row>
               <Spacer></Spacer>
-              <GenericButton onClick={addProduct}>
+              <GenericButton
+                onClick={addProduct}
+                disabled={
+                  nombre.length < 1 ||
+                  categoria === "" ||
+                  descripcion.length < 1 ||
+                  (tipo === "unitario" && precio <= 0) ||
+                  (tipo === "area" && precioCm <= 0) ||
+                  tipo === ""
+                }
+              >
                 Crear producto
               </GenericButton>
             </Row>
@@ -129,7 +215,12 @@ const NewProduct = () => {
           <Column size="1">
               <ImageRow>
                 <Spacer></Spacer>
-                <AddImageButton name="Prueba" image="https://img.pngio.com/free-png-plus-sign-transparent-plus-signpng-images-pluspng-plus-sign-transparent-background-512_512.png"></AddImageButton>
+                {showPic && (
+                  <ProductImage></ProductImage>
+                )}
+                {!showPic && (
+                  <ImagePlaceholder></ImagePlaceholder>
+                )}
                 <Spacer></Spacer>
               </ImageRow>
           </Column>
