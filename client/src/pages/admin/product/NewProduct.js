@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../../../styled'
 import AddImageButton from '../../../components/nav/AddImageButton'
 import AdminNav from '../../../components/nav/AdminNav'
+import { useSelector } from "react-redux";
 
 const MainRow = styled.div `
   display: flex;
