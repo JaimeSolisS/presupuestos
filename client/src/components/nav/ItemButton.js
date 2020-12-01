@@ -59,7 +59,6 @@ background-color: white;
 
 const ItemButton = (props) => {
     const {image, name, id, hidden} = props;
-    console.log(id)
     let {user} = useSelector((state) => ({...state}));
     let admin = false;
     if(user){
@@ -72,7 +71,6 @@ const ItemButton = (props) => {
     
     let [visible, setVisible] = useState(false)
     //visible = hidden
-    console.log(visible)
     //setVisible(hidden)
     /*function toProduct(e) {
         e.preventDefault();
