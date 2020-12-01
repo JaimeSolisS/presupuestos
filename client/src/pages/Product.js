@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
 import {StyledContainer, ProductLabel, Spacer, Column, Row, TextRight, StyledInputFormControl, GenericButton} from '../styled'
 import AddImageButton from '../components/nav/AddImageButton'
+import {ShoppingCartOutlined} from "@ant-design/icons"
+import {getProductById} from '../functions/product'
 
   const ProductTitle = styled.h1 `
     font-weight: bold;
@@ -21,10 +23,18 @@ import AddImageButton from '../components/nav/AddImageButton'
     currency: 'MXN'
   }).format(value);
 
-
-
-const Product = (props) => {
-  const {id} = props;
+  const Product = ({ match }) => {
+    const [product, setProduct] = useState({});
+  
+    const { id } = match.params;
+  
+    useEffect(() => {
+      loadSingleProduct();
+    }, [id]);
+  
+    const loadSingleProduct = () =>
+    getProductById(id).then((res) => setProduct(res.data));
+  
   const [cantidad = 0, setCantidad] = useState("")
   var producto = {
     nombre: "NAME",
@@ -33,7 +43,10 @@ const Product = (props) => {
     precio: "12.15"
   };
 
-  var imageLink = "https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png";
+  producto.nombre = product.name;
+  producto.product_key = product.id;
+  producto.descripcion = product.description;
+  var imageLink = product.image;
 
   function addToCart(e) {
     e.preventDefault();
@@ -60,6 +73,7 @@ const Product = (props) => {
 
   return (
     <StyledContainer>
+      {JSON.stringify(product)}
       <Row>
         <Column size="2" paddingRight="5%">
           <Row>
@@ -99,7 +113,7 @@ const Product = (props) => {
               <GenericButton 
                 onClick={addToCart}
                 disabled={cantidad<1}
-              >Agregar a carrito</GenericButton>
+              >Agregar a carrito <ShoppingCartOutlined/></GenericButton>
           </Row>
         </Column>
 
@@ -116,3 +130,4 @@ const Product = (props) => {
  }
 
  export default Product;
+  
