@@ -8,6 +8,8 @@ import firebase from 'firebase'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
+import { getCategories } from "../../functions/category";
+
 const {SubMenu, Item} = Menu; //Menu.SubMenu, Menu.Item
 
     const StyledItem = styled(Menu.Item)`
@@ -17,6 +19,9 @@ const {SubMenu, Item} = Menu; //Menu.SubMenu, Menu.Item
 const Header = () => {
 
     const [current, setCurrent] = useState('home')
+
+    const [loading, setLoading] = useState(false);
+
 
     let dispatch = useDispatch();
     let {user} = useSelector((state) => ({...state}));
@@ -45,7 +50,6 @@ const Header = () => {
         history.push('/');
 
     };
-    
 
     //cambiar a mostrar el nombre y no el correo 
     return (
