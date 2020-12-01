@@ -5,7 +5,7 @@ import {HorizontalDiv, Spacer} from '../../styled'
 import {useSelector} from 'react-redux'
 import {getProductById} from '../../functions/product'
 import {Link}  from 'react-router-dom'
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 const StyledButton = styled.div `
 border: none;
 width: 100%;

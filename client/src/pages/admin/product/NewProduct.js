@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../../../styled'
-import AddImageButton from '../../../components/nav/AddImageButton'
 import AdminNav from '../../../components/nav/AdminNav'
 import {createProduct} from "../../../functions/product";
 import {createPricePerQuantity} from "../../../functions/productXquantity";

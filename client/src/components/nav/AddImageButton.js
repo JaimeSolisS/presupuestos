@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {HorizontalDiv, Spacer} from '../../styled'
-import {PictureOutlined} from '@ant-design/icons';
 
 const StyledButton = styled.button`
 border: none;
