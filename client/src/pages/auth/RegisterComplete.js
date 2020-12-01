@@ -1,6 +1,4 @@
-import { Button } from 'antd';
 import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
 import {auth} from '../../firebase'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'

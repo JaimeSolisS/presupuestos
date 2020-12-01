@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { Menu} from 'antd';
-import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined, SearchOutlined} from '@ant-design/icons';
+import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 import {Link}  from 'react-router-dom'
 
 import firebase from 'firebase'

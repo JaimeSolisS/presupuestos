@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {StyledContainer, StyledH4, StyledInputFormControl, StyledGridContainer} from '../styled'
+import {StyledContainer} from '../styled'
 import ItemButton from '../components/nav/ItemButton'
 import { getProductsByCategory } from '../functions/product';
 import LocalSearch from '../components/forms/LocalSearch';

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
 import {StyledContainer, ProductLabel, Spacer, Column, Row, TextRight, StyledInputFormControl, GenericButton} from '../styled'
-import AddImageButton from '../components/nav/AddImageButton'
 import {ShoppingCartOutlined} from "@ant-design/icons"
 import {getProductById} from '../functions/product'
 import {getPriceQuantityByProductId} from '../functions/productXquantity'
