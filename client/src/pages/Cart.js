@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ProductInCart from '../components/cards/ProductInCart'
 
 const Cart = () => {
   const { cart, user } = useSelector((state) => ({ ...state }));
@@ -17,13 +18,17 @@ const Cart = () => {
       <thead className="thead-light">
         <tr>
           <th scope="col">Imagen</th>
+          <th scope="col">Nombre</th>
           <th scope="col">Detalles</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Precio</th>
-          <th scope="col">Agregar a presupuesto?</th>
           <th scope="col">Remover</th>
         </tr>
       </thead>
+
+      {cart.map((p) => (
+        <ProductInCart key={p._id} p={p} />
+      ))}
 
     </table>
   );
