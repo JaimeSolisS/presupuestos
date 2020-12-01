@@ -59,7 +59,7 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
   producto.product_key = product.id;
   producto.descripcion = product.description;
   if (priceQty === null) {
-    producto.precio = priceArea.price
+    producto.precio = priceArea.priceArea
   } else if (priceArea === null){
     producto.precio = priceQty.price
   }
