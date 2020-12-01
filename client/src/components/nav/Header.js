@@ -94,23 +94,23 @@ const Header = () => {
         </Item>
         
         <Item key="others" className="float-right">
-            <Link to = "/">Otros</Link>
+            <Link to = "/Otros">Otros</Link>
         </Item>
         
         <Item key="paper" className="float-right">
-            <Link to = "/">Papeleria</Link>
+            <Link to = "/Papeleria">Papeleria</Link>
         </Item>
         
         <Item key="printing" className="float-right">
-            <Link to = "/">Impresiones</Link>
+            <Link to = "/Impresiones">Impresiones</Link>
         </Item>
         
         <Item key="ink" className="float-right">
-            <Link to = "/">Serigrafía</Link>
+            <Link to = "/Serigrafia">Serigrafía</Link>
         </Item>
 
         <Item key="clothing" className="float-right">
-            <Link to = "/">Ropa</Link>
+            <Link to = "/Ropa">Ropa</Link>
         </Item>
         
       </Menu>      

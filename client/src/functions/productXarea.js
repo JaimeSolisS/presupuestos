@@ -5,6 +5,6 @@ export const createPricePerArea = (price, authtoken) =>{
           authtoken,
         },});
 }
-export const getPriceQuantityByProductId = (prodId) =>{
+export const getPriceAreaByProductId = (prodId) =>{
     return axios.get(`${process.env.REACT_APP_API}/get-price-area-by-productid/${prodId}`)
 }

@@ -4,6 +4,8 @@ import {StyledContainer, ProductLabel, Spacer, Column, Row, TextRight, StyledInp
 import AddImageButton from '../components/nav/AddImageButton'
 import {ShoppingCartOutlined} from "@ant-design/icons"
 import {getProductById} from '../functions/product'
+import {getPriceQuantityByProductId} from '../functions/productXquantity'
+import {getPriceAreaByProductId} from '../functions/productXarea'
 
   const ProductTitle = styled.h1 `
     font-weight: bold;
@@ -25,27 +27,45 @@ import {getProductById} from '../functions/product'
 
   const Product = ({ match }) => {
     const [product, setProduct] = useState({});
-  
+    const [priceQty, setpriceQty] = useState({});
+    const [priceArea, setpriceArea] = useState({});
+
     const { id } = match.params;
-  
+
     useEffect(() => {
       loadSingleProduct();
+      loadPrice();
+      loadPriceByArea();
     }, [id]);
-  
+
     const loadSingleProduct = () =>
     getProductById(id).then((res) => setProduct(res.data));
-  
+
+    const loadPrice = () =>
+    getPriceQuantityByProductId(id).then((res) => setpriceQty(res.data));
+
+    const loadPriceByArea = () =>
+    getPriceAreaByProductId(id).then((res) => setpriceArea(res.data));
+
   const [cantidad = 0, setCantidad] = useState("")
   var producto = {
-    nombre: "NAME",
-    product_key: "1234",
-    descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    precio: "12.15"
+    nombre: null,
+    product_key: null,
+    descripcion: null,
+    precio: null
   };
 
   producto.nombre = product.name;
   producto.product_key = product.id;
   producto.descripcion = product.description;
+  if (priceQty === null) {
+    producto.precio = priceArea.priceArea
+  } else if (priceArea === null){
+    producto.precio = priceQty.price
+  }
+
+  console.log("producto.precio", producto.precio);
+
   var imageLink = product.image;
 
   function addToCart(e) {
@@ -73,7 +93,6 @@ import {getProductById} from '../functions/product'
 
   return (
     <StyledContainer>
-      {JSON.stringify(product)}
       <Row>
         <Column size="2" paddingRight="5%">
           <Row>

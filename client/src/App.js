@@ -22,7 +22,11 @@ import AdminRoute from './components/routes/AdminRoute'
 import NewProduct from './pages/admin/product/NewProduct'
 import Product from './pages/Product'
 import CategoryCreate from './pages/admin/category/CategoryCreate'
-
+import Ropa from './pages/Ropa'
+import Serigrafia from './pages/Serigrafia'
+import Papeleria from './pages/Papeleria'
+import Impresiones from './pages/Impresiones'
+import Otros from './pages/Otros'
 import Cart from './pages/Cart'
 
 import {auth} from './firebase'
@@ -70,6 +74,11 @@ const App = () => {
       <Route exact path="/" component={Home}/>
       <Route exact path="/login" component={Login}/>
       <Route exact path="/Product/:id" component={Product}/>
+      <Route exact path="/Ropa" component={Ropa}/>
+      <Route exact path="/Serigrafia" component={Serigrafia}/>
+      <Route exact path="/Papeleria" component={Papeleria}/>
+      <Route exact path="/Otros" component={Otros}/>
+      <Route exact path="/Impresiones" component={Impresiones}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/register/complete" component={RegisterComplete}/>
       <Route exact path="/forgot/password" component={ForgotPassword}/>
