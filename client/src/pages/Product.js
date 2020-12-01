@@ -5,6 +5,7 @@ import {ShoppingCartOutlined} from "@ant-design/icons"
 import {getProductById} from '../functions/product'
 import {getPriceQuantityByProductId} from '../functions/productXquantity'
 import {getPriceAreaByProductId} from '../functions/productXarea'
+import {Tooltip} from 'antd'
 import _ from 'lodash'
 
   const ProductTitle = styled.h1 `
@@ -32,6 +33,8 @@ import _ from 'lodash'
     const [largo = 0, setLargo] = useState({});
     const [ancho = 0, setAncho] = useState({});
     const [cantidad = 0, setCantidad] = useState("")
+
+    const [tooltip, setTooltip] = useState('Dale click para añadir al carrito')
 
     const { id } = match.params;
 
@@ -133,6 +136,8 @@ import _ from 'lodash'
       let unique = _.unionWith(cart, _.isEqual)
       //save to local storage
       localStorage.setItem('cart', JSON.stringify(unique));
+      //mostrar tooltip
+      setTooltip('Producto añadido')
  
     }};
 
@@ -176,12 +181,15 @@ import _ from 'lodash'
                     prefix={'$'}
                   >
                     {precioXcantidad()}</StyledLabel>
-                  <GenericButton
+                    <Tooltip title={tooltip}>
+                    <GenericButton
                     onClick={handleAddToCart}
                     disabled={cantidad<1}
                   >
                     Agregar a carrito <ShoppingCartOutlined/>
                   </GenericButton>
+                    </Tooltip>
+                 
               </Row>
             </>
           )}
@@ -276,12 +284,15 @@ import _ from 'lodash'
                   prefix={'$'}
                 >
                   {precioXarea()}</StyledLabel>
+                <Tooltip title={tooltip}>
                 <GenericButton
                   onClick={handleAddToCart}
                   disabled={cantidad<1}
                 >
                   Agregar a carrito <ShoppingCartOutlined/>
                 </GenericButton>
+                </Tooltip>
+              
               </Row>
             </>
           )}
