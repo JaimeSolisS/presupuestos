@@ -7,6 +7,7 @@ import {getPriceQuantityByProductId} from '../functions/productXquantity'
 import {getPriceAreaByProductId} from '../functions/productXarea'
 import {Tooltip} from 'antd'
 import _ from 'lodash'
+import {useSelector, useDispatch} from 'react-redux'
 
   const ProductTitle = styled.h1 `
     font-weight: bold;
@@ -33,8 +34,11 @@ import _ from 'lodash'
     const [largo = 0, setLargo] = useState({});
     const [ancho = 0, setAncho] = useState({});
     const [cantidad = 0, setCantidad] = useState("")
-
+    //tooltip
     const [tooltip, setTooltip] = useState('Dale click para añadir al carrito')
+    //redux
+    const {user, cart} = useSelector((state) => ({...state})); 
+    const dispatch = useDispatch()
 
     const { id } = match.params;
 
@@ -138,6 +142,12 @@ import _ from 'lodash'
       localStorage.setItem('cart', JSON.stringify(unique));
       //mostrar tooltip
       setTooltip('Producto añadido')
+
+      //add to redux state
+      dispatch({
+        type: 'ADD_TO_CART', 
+        payload: unique, 
+      })
  
     }};
 

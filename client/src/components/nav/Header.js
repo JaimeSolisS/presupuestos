@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { Menu} from 'antd';
+import { Menu, Badge} from 'antd';
 import { HomeOutlined , UserOutlined, SettingOutlined, UserAddOutlined, LogoutOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 import {Link}  from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
 import { getCategories } from "../../functions/category";
+import { cartReducer } from '../../reducers/cartReducer';
 
 const {SubMenu, Item} = Menu; //Menu.SubMenu, Menu.Item
 
@@ -24,7 +25,7 @@ const Header = () => {
 
 
     let dispatch = useDispatch();
-    let {user} = useSelector((state) => ({...state}));
+    let {user, cart} = useSelector((state) => ({...state}));
     let admin = false;
     if(user){
         if(user.role == "customer"){
@@ -89,8 +90,12 @@ const Header = () => {
         )
         }
         
-        <Item key="presupuestos" icon={<ShoppingCartOutlined />} className="float-right">
-            <Link to = "/cart">Presupuestos</Link>
+        <Item key="cart" icon={<ShoppingCartOutlined />} className="float-right">
+            <Link to = "/cart">
+                <Badge count={cart.length} offset={[9,0]}>
+                    Carrito
+                </Badge>
+            </Link>
         </Item>
         
         <Item key="others" className="float-right">
