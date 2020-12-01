@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import {StyledContainer, StyledInputFormControl, ProductLabel, Spacer, Column, Row, TextRight, GenericButton, GenericSelect} from '../../../styled'
 import AddImageButton from '../../../components/nav/AddImageButton'
 import AdminNav from '../../../components/nav/AdminNav'
@@ -27,6 +28,7 @@ const NewProduct = () => {
   const [precioCm, setPrecioCm] = useState("");
   const [picture, setPicture] = useState("");
   const [showPic, setShowPicture] = useState("");
+  const { user } = useSelector((state) => ({ ...state }));
 
   // redux
   //const { user } = useSelector((state) => ({ ...state }));
@@ -39,22 +41,24 @@ const NewProduct = () => {
       description: descripcion,
       image: picture
     };
-    createProduct(product).then((response)=>{
+    createProduct(product, user.token).then((response)=>{
       if(tipo === "unitario"){
         const pricing = {
           price: precio,
           prodId: response.data._id
         }
-        createPricePerQuantity(pricing)
+        createPricePerQuantity(pricing, user.token)
       }else if(tipo === "area"){
         const pricing = {
           minPrice: precioMin,
           priceArea: precioCm,
           prodId: response.data._id
         }
-        createPricePerArea(pricing)
+        createPricePerArea(pricing, user.token)
       }
+      toast.success(`"${response.data.name}" creado`);
     })
+    
   };
 
   const handleUpdatePicture = e => {
