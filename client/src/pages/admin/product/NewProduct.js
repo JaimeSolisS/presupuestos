@@ -33,21 +33,33 @@ const NewProduct = () => {
 
   function addProduct(e) {
     e.preventDefault();
-    var sendToDB = {
-      nombre:           nombre,
-      categoria:        categoria,
-      descripcion:      descripcion,
-      tipo:             tipo,
-      precioMin:        (tipo === "unitario" ? null : precioMin),
-      precio:           (tipo === "area" ? null : precio),
-      precioCm:         (tipo === "unitario" ? null : precioCm),
-      picture:          picture
+    var product = {
+      name: nombre,
+      category: categoria,
+      description: descripcion,
+      image: picture
     };
-    console.log(sendToDB);
+    createProduct(product).then((response)=>{
+      if(tipo === "unitario"){
+        const pricing = {
+          price: precio,
+          prodId: response.data._id
+        }
+        createPricePerQuantity(pricing)
+      }else if(tipo === "area"){
+        const pricing = {
+          minPrice: precioMin,
+          priceArea: precioCm,
+          prodId: response.data._id
+        }
+        createPricePerArea(pricing)
+      }
+    })
   };
 
   const handleUpdatePicture = e => {
     e.preventDefault();
+    e.stopPropagation();
     setPicture(e.target.value);
     setShowPicture(picture);
   }
@@ -68,8 +80,7 @@ const NewProduct = () => {
       <div className='row'>
         <div className= 'col-md-2'>
           <AdminNav/>
-        </div>
-        <form onSubmit={addProduct}>
+        </div> 
       <StyledContainer>
         <Row>
           <Column size="2" paddingRight="5%">
@@ -126,6 +137,7 @@ const NewProduct = () => {
               </Column>
               <Column size="1">
                 <GenericButton
+                  key={"pictureButton"}
                   disabled={picture.length<10}
                   onClick={e => setShowPicture(picture)}
                   style={{marginLeft:"15px", float: "right"}}
@@ -210,6 +222,7 @@ const NewProduct = () => {
             <Row>
               <Spacer></Spacer>
               <GenericButton
+                key={"addButton"}
                 onClick={addProduct}
                 disabled={
                   nombre.length < 1 ||
@@ -240,7 +253,6 @@ const NewProduct = () => {
           </Column>
         </Row>
       </StyledContainer>
-    </form>
       </div>
     </div>
   )
