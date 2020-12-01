@@ -6,6 +6,7 @@ import {ShoppingCartOutlined} from "@ant-design/icons"
 import {getProductById} from '../functions/product'
 import {getPriceQuantityByProductId} from '../functions/productXquantity'
 import {getPriceAreaByProductId} from '../functions/productXarea'
+import _ from 'lodash'
 
   const ProductTitle = styled.h1 `
     font-weight: bold;
@@ -86,8 +87,8 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
   }
 
   function precioXcantidad () {
-    var temp = producto.precio * cantidad;
-    return numberFormat(temp);
+    total = producto.precio * cantidad;
+    return numberFormat(total);
   }
 
   function getArea () {
@@ -116,6 +117,25 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
     // style={{height: 400, width: 250}}
     />
   );
+
+  const handleAddToCart = () => {
+    //create array
+    let cart = []
+    if(typeof window !== 'undefined'){
+      //if cart is in localstorage GET it
+      if (localStorage.getItem('cart')){
+        cart = JSON.parse(localStorage.getItem('cart'));
+      }
+      //push new product to cart
+      cart.push({ ...product, total,
+      });
+
+      //remove duplicate 
+      let unique = _.unionWith(cart, _.isEqual)
+      //save to local storage
+      localStorage.setItem('cart', JSON.stringify(unique));
+ 
+    }};
 
   return (
     <StyledContainer>
@@ -158,7 +178,7 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
                   >
                     {precioXcantidad()}</StyledLabel>
                   <GenericButton
-                    onClick={addToCart}
+                    onClick={handleAddToCart}
                     disabled={cantidad<1}
                   >
                     Agregar a carrito <ShoppingCartOutlined/>
@@ -258,7 +278,7 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
                 >
                   {precioXarea()}</StyledLabel>
                 <GenericButton
-                  onClick={addToCart}
+                  onClick={handleAddToCart}
                   disabled={cantidad<1}
                 >
                   Agregar a carrito <ShoppingCartOutlined/>
@@ -283,4 +303,3 @@ import {getPriceAreaByProductId} from '../functions/productXarea'
  }
 
  export default Product;
-  
