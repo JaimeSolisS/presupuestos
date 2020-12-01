@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import {EyeOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 import {HorizontalDiv, Spacer} from '../../styled'
 import {useSelector} from 'react-redux'
-const StyledButton = styled.button `
+import Product from '../../pages/Product'
+import {Link}  from 'react-router-dom'
+const StyledButton = styled.div `
 border: none;
 width: 100%;
 height: 100%;
@@ -56,7 +58,8 @@ background-color: white;
 `;
 
 const ItemButton = (props) => {
-    const {image, name} = props;
+    const {image, name, id, hidden} = props;
+    console.log(id)
     let {user} = useSelector((state) => ({...state}));
     let admin = false;
     if(user){
@@ -68,22 +71,26 @@ const ItemButton = (props) => {
     }
     
     let [visible, setVisible] = useState(false)
-
-    function toProduct(e) {
+    //visible = hidden
+    console.log(visible)
+    //setVisible(hidden)
+    /*function toProduct(e) {
         e.preventDefault();
         console.log('The button was clicked.');
-    }
-    function hidden(e){
+    }*/
+    function hide(e){
         e.preventDefault();
         e.stopPropagation();
         setVisible(!visible);
+        //visible = !visible;
     }
 
     return (
-        <StyledButton onClick={toProduct}>
+        <Link to={`/product/${id}`}>
+        <StyledButton>
             {admin && (
                 <HorizontalDiv>
-                    <StyledVisible onClick={hidden}>
+                    <StyledVisible onClick={hide}>
                         {visible && (
                             <EyeOutlined/>
                         )}
@@ -108,6 +115,7 @@ const ItemButton = (props) => {
             </HorizontalDiv>
             
         </StyledButton>
+        </Link>
     );
 }
 export default ItemButton;

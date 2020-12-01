@@ -23,8 +23,8 @@ import AddImageButton from '../components/nav/AddImageButton'
 
 
 
-const Product = () => {
-
+const Product = (props) => {
+  const {id} = props;
   const [cantidad = 0, setCantidad] = useState("")
   var producto = {
     nombre: "NAME",

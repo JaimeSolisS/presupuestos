@@ -37,7 +37,7 @@ import LocalSearch from '../components/forms/LocalSearch';
             <div className="row">
             {products.filter(searched(keyword)).map((product) => (
             <div key={product._id} className="col-md-4">
-              <ItemButton name={product.name}  image={product.image}/>
+              <ItemButton name={product.name}  image={product.image} id={product._id} hidden={product.hidden}/>
             </div>
           ))}
             </div>
