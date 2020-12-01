@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import {EyeOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 import {HorizontalDiv, Spacer} from '../../styled'
 import {useSelector} from 'react-redux'
-import Product from '../../pages/Product'
+import {getProductById} from '../../functions/product'
 import {Link}  from 'react-router-dom'
+import { toast } from "react-toastify";
 const StyledButton = styled.div `
 border: none;
 width: 100%;
@@ -60,7 +61,12 @@ background-color: white;
 const ItemButton = (props) => {
     const {image, name, id, hidden} = props;
     let {user} = useSelector((state) => ({...state}));
+    const [product, setProduct] = useState({});
+    let [visible, setVisible] = useState(false)
     let admin = false;
+    const loadSingleProduct = () =>
+    getProductById(id).then((res) => setProduct(res.data));
+
     if(user){
         if(user.role == "customer"){
             admin = false;
@@ -68,20 +74,14 @@ const ItemButton = (props) => {
             admin = true;
         }
     }
-    
-    let [visible, setVisible] = useState(false)
-    //visible = hidden
-    //setVisible(hidden)
-    /*function toProduct(e) {
-        e.preventDefault();
-        console.log('The button was clicked.');
-    }*/
     function hide(e){
         e.preventDefault();
         e.stopPropagation();
         setVisible(!visible);
-        //visible = !visible;
+        toast.info("No se pudo implementar por error To Many Re-renders al tratar de cargar el estado hidden de los botones")
     }
+    //setVisible(product.hidden)
+    //visible = product.hidden
 
     return (
         <Link to={`/Product/${id}`}>
