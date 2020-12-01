@@ -105,6 +105,7 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
           };
 
     const loginForm = () => (
+        <>
         <form onSubmit={handleSubmit}>
 
         <StyledDivFormGroup>
@@ -133,16 +134,18 @@ import {StyledContainer, StyledDivRow, StyledInputFormControl,
              <span><MailOutlined/> Entrar </span>
         </StyledMailButton>
 
-        <StyledGoogleButton
-        onClick={googleLogin}>
-            <span><GoogleOutlined/> Entrar con Google</span>
-        </StyledGoogleButton>
-
-
-
-        <Link to= "forgot/password" className="float-right text-danger">¿Olvidaste tu Contraseña?</Link>
+        
 
     </form>
+    <StyledGoogleButton
+    onClick={googleLogin}>
+        <span><GoogleOutlined/> Entrar con Google</span>
+    </StyledGoogleButton>
+
+
+
+    <Link to= "forgot/password" className="float-right text-danger">¿Olvidaste tu Contraseña?</Link>
+    </>
 );
      return (
         <StyledContainer>
