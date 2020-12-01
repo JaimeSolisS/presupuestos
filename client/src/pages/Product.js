@@ -126,7 +126,7 @@ import _ from 'lodash'
         cart = JSON.parse(localStorage.getItem('cart'));
       }
       //push new product to cart
-      cart.push({ ...product, total,
+      cart.push({ ...product, cantidad, total,
       });
 
       //remove duplicate 
