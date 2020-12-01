@@ -7,9 +7,9 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const getTotal = () => {
-   // return cart.reduce((currentValue, nextValue) => {
-     // return currentValue + nextValue.count * nextValue.price;
-    //}, 0);
+   return cart.reduce((currentValue, nextValue) => {
+     return currentValue + nextValue.total;
+    }, 0);
   };
 
   const showCartItems = () => (
@@ -33,23 +33,27 @@ const Cart = () => {
     <div className="container-fluid pt-2">
       <div className="row">
         <div className="col-md-8">
-          <h4>Carrito - # Productos</h4>
+          <h4>Carrito - {cart.length} Productos</h4>
 
-          {cart ? (
+          {!cart.length ? (
             <p>
-              No products in cart. <Link to="/shop">Continue Shopping.</Link>
+              No hay productos en el carrito. <Link to="/">Continuar viendo productos.</Link>
             </p>
           ) : (
             showCartItems()
           )}
-
-          Necesito el carrito en redux y crear componente para renderearlo aqui
         
         </div>
         <div className="col-md-4">
           <h4>Resumen de Orden</h4>
           <hr />
           <p>Productos</p>
+          {cart.map((c,i) => (
+            <div key={i}>
+              <p>{c.name} x {c.cantidad} = ${c.total}</p>
+            </div>
+
+          ))}
          
           <hr />
           Total: <b>${getTotal()}</b>
