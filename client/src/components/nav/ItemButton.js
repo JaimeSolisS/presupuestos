@@ -86,7 +86,7 @@ const ItemButton = (props) => {
     }
 
     return (
-        <Link to={`/product/${id}`}>
+        <Link to={`/Product/${id}`}>
         <StyledButton>
             {admin && (
                 <HorizontalDiv>
