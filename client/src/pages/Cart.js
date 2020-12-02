@@ -18,12 +18,14 @@ const Cart = ({history}) => {
 
   const saveOrderToDb = () => {
     userCart(cart, user.token).then((res) => {
-      console.log('CART POST RESPONSE', res);
+      while (cart.length>0){
+        cart.splice(0);
+      }
+      // console.log('CART POST RESPONSE', res);
+      // console.log('cart.length', cart.length);
       toast.success(`Presupuesto creado`);
       history.push("/user/history");
-      
-    }) .catch((err) => console.log('Error savig cart', err))
-    
+    }).catch((err) => console.log('Error savig cart', err))
   };
 
   const showCartItems = () => (

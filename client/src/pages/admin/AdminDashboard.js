@@ -15,13 +15,13 @@ const AdminDashboard = () => {
 
   const loadBudgets = () =>
     getBudgets(user.token).then((res) => {
-      console.log(JSON.stringify(res.data, null, 4));
+      //console.log(JSON.stringify(res.data, null, 4));
       setBudgets(res.data);
     });
 
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{paddingRight:"30px"}}>
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

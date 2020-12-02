@@ -89,7 +89,7 @@ import {useSelector, useDispatch} from 'react-redux'
       quantity:      cantidad,
       price:         producto.precio * cantidad
     }
-    console.log(sendToDB);
+    //console.log(sendToDB);
   }
 
   function precioXcantidad () {

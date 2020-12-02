@@ -14,7 +14,7 @@ const History = () => {
 
   const loadUserBudgets = () =>
     getUserBudgets(user.token).then((res) => {
-      console.log(JSON.stringify(res.data, null, 4));
+      //console.log(JSON.stringify(res.data, null, 4));
       setBudgets(res.data);
     });
    

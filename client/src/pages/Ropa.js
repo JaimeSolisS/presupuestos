@@ -17,7 +17,7 @@ import LocalSearch from '../components/forms/LocalSearch';
     
       const loadAllProducts = () => {
         getProductsByCategory('ropa').then((res) => {
-          console.log(res)
+          //console.log(res)
           if(res){
             setProducts(res.data);
           }

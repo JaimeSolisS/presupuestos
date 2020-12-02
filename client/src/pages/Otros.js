@@ -17,7 +17,7 @@ import LocalSearch from '../components/forms/LocalSearch';
     
       const loadAllProducts = () => {
         getProductsByCategory('otros').then((res) => {
-          console.log(res)
+          //console.log(res)
           if(res){
             setProducts(res.data);
           }

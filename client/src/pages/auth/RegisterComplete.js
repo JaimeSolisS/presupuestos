@@ -66,7 +66,7 @@ import {StyledInputFormControl, StyledDivFormGroup, StyledRegisterButton,
 
             }
         } catch (error){
-            console.log(error)
+            //console.log(error)
             toast.error(error.message)
         }
         };
