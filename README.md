@@ -1,4 +1,7 @@
 # presupuestos
+
+![mongoDB](https://img.shields.io/badge/-mongoDB-brightgreen) ![express](https://img.shields.io/badge/-Express-lightgrey) ![react](https://img.shields.io/badge/-React-blue) ![Node](https://img.shields.io/badge/-Node-success)
+
 Paso 1: Bajar el repositorio a tu computadora  
   
 Paso 2: Bajar mongoDB Compass de:  
