@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import ProductInCart from '../components/cards/ProductInCart'
+import {userCart} from '../functions/user'
 
-const Cart = () => {
+const Cart = ({history}) => {
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
@@ -11,6 +13,17 @@ const Cart = () => {
    return cart.reduce((currentValue, nextValue) => {
      return currentValue + nextValue.total;
     }, 0);
+  };
+
+
+  const saveOrderToDb = () => {
+    userCart(cart, user.token).then((res) => {
+      console.log('CART POST RESPONSE', res);
+      toast.success(`Presupuesto creado`);
+      history.push("/user/history");
+      
+    }) .catch((err) => console.log('Error savig cart', err))
+    
   };
 
   const showCartItems = () => (
@@ -64,9 +77,13 @@ const Cart = () => {
           Total: <b>${getTotal()}</b>
           <hr />
           {user ? (
-            <button className="btn btn-sm btn-primary mt-2">
-              Crear presupuesto
-            </button>
+            <button
+            onClick={saveOrderToDb}
+            className="btn btn-sm btn-primary mt-2"
+            disabled={!cart.length}
+          >
+            Crear presupuesto
+          </button>
           ) : (
             <button className="btn btn-sm btn-primary mt-2">
                 <Link
