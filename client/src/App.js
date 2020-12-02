@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 //import {composeWithDevTools} from 'redux-devtools-extension'
 
 import Home from './pages/Home'
+import NoRoute from './pages/NoRoute'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import  Header  from './components/nav/Header'
@@ -86,6 +87,7 @@ const App = () => {
       <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
       <AdminRoute exact path="/admin/category" component={CategoryCreate}/>
       <AdminRoute exact path="/admin/product/NewProduct" component={NewProduct}/>
+      <Route exact component={NoRoute}/>
 
       <Route exact path='/cart' component={Cart} />
     </Switch>
