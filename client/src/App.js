@@ -87,9 +87,10 @@ const App = () => {
       <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
       <AdminRoute exact path="/admin/category" component={CategoryCreate}/>
       <AdminRoute exact path="/admin/product/NewProduct" component={NewProduct}/>
-      <Route exact component={NoRoute}/>
-
       <Route exact path='/cart' component={Cart} />
+      
+      
+      <Route exact component={NoRoute}/>
     </Switch>
   </> 
   )

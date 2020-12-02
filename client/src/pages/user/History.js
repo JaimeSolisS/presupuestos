@@ -26,7 +26,8 @@ const History = () => {
           <th scope="col">Nombre</th>
           <th scope="col">Detalles</th>
           <th scope="col">Cantidad</th>
-          <th scope="col">Precio</th>
+          <th scope="col">Precio Unitario</th>
+          <th scope="col">Subtotal</th>
         </tr>
       </thead>
 
@@ -38,7 +39,8 @@ const History = () => {
             </td>
             <td>{p.product.description}</td>
             <td>{p.count}</td>
-            <td>${p.total}</td>
+            <td>${p.price / p.count}</td>
+            <td>${p.price}</td>
           </tr>
         ))}
       </tbody>

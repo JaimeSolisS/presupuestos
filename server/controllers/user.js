@@ -26,7 +26,7 @@ exports.userCart = async(req, res) => {
 
         object.product = cart[i]._id;
         object.count = cart[i].cantidad;
-        object.total = cart[i].total;
+        object.price = cart[i].total;
         // get price for creating total
         //let { price } = await Product.findById(cart[i]._id).select("total").exec();
         //object.price = price;
@@ -38,7 +38,7 @@ exports.userCart = async(req, res) => {
 
     let cartTotal = 0;
     for (let i = 0; i < products.length; i++) {
-        cartTotal = cartTotal + products[i].total;
+        cartTotal = cartTotal + products[i].price;
     }
 
     // console.log("cartTotal", cartTotal);
