@@ -1,6 +1,11 @@
 # presupuestos
 
 ![mongoDB](https://img.shields.io/badge/-mongoDB-brightgreen) ![express](https://img.shields.io/badge/-Express-lightgrey) ![react](https://img.shields.io/badge/-React-blue) ![Node](https://img.shields.io/badge/-Node-success)
+  
+IMPORTANTE EN EL SIGUIENTE VIDEO SE MUESTRA LA FUNCIONALIDAD DE LA APLICACION  
+https://www.youtube.com/watch?v=5VmAWSLC3OM&ab_channel=DanilN.  
+  
+El proposito de este proyecto fue crear una app web donde el usuario pudiera crear presupuestos de los productos del negocio de serigrafia para que el administrador pueda ver dichos presupuestos, el administrador podrá crear los productos y ver los presupuestos de los usuarios. El usuario podrá agregar productos al "carrito" y crear presupuestos.
 
 Paso 1: Bajar el repositorio a tu computadora  
   
